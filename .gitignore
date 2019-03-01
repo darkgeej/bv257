@@ -33,3 +33,4 @@ deconz.conf
 alarm.yaml
 .uuid
 home-assistant.log
+!/bv257
