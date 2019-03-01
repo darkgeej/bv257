@@ -27,6 +27,8 @@ emulated_hue_ids.json
 pyozw.sqlite
 .*
 !/.gitignore
+/.gitignore
+/bv257
 home-assistant_v2.db
 .gitignore
 deconz.conf
