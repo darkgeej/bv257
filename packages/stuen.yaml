@@ -1,0 +1,45 @@
+##################################################################
+## Packages / Stuen / Tnx to Cvoid for help         ##
+## @darkgeej - https://github.com/darkgeej/Home-AssistantConfig ##
+##################################################################
+homeassistant:
+
+
+###########
+## Group ##
+###########
+group:
+
+  Bv257stue:
+    control: hidden
+    name: "bv257stuen"
+    view: no
+    entities:
+      - switch.phlampen
+      - switch.retrolampen
+      - switch.oleslampe
+
+############
+## Switch ##
+############
+switch:
+  platform: command_line
+  switches:
+
+    phlampen:
+      command_on: "/usr/bin/curl -X GET http://10.0.0.126/cm?cmnd=rfkey1"
+      command_off: "/usr/bin/curl -X GET http://10.0.0.126/cm?cmnd=rfkey2"
+      value_template: '{{ value == "1" }}'
+      friendly_name: PH lampen
+
+    retrolampen:
+      command_on: "/usr/bin/curl -X GET http://10.0.0.126/cm?cmnd=rfkey3"
+      command_off: "/usr/bin/curl -X GET http://10.0.0.126/cm?cmnd=rfkey4"
+      value_template: '{{ value == "1" }}'
+      friendly_name: Retro lampen
+
+    oleslampe:
+      command_on: "/usr/bin/curl -X GET http://10.0.0.126/cm?cmnd=rfkey5"
+      command_off: "/usr/bin/curl -X GET http://10.0.0.126/cm?cmnd=rfkey6"
+      value_template: '{{ value == "1" }}'
+      friendly_name: Oles lampe

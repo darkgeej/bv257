@@ -1,0 +1,60 @@
+##################################################################
+## Packages / Esp8266 #2 / Tnx to Cvoid for help                ##
+## @darkgeej - https://github.com/darkgeej/Home-AssistantConfig ##
+##################################################################
+homeassistant:
+  customize:
+
+    switch.radio:
+      icon: mdi:spotlight
+      friendly_name: Radio
+
+    switch.antenne:
+      icon: mdi:spotlight
+      friendly_name: Antenne
+
+###############
+## Switches  ##
+###############
+switch:
+
+  - platform: mqtt
+    name: "Radio"
+    state_topic: "esp01/5/Switch"
+    command_topic: "esp01/gpio/5"
+    payload_on: "1"
+    payload_off: "0"
+    optimistic: false
+    qos: 0
+    retain: true
+
+  - platform: mqtt
+    name: "Antenne"
+    state_topic: "esp01/4/Switch"
+    command_topic: "esp01/gpio/4"
+    payload_on: "1"
+    payload_off: "0"
+    optimistic: false
+    qos: 0
+    retain: true
+
+############
+## Groups ##
+############
+group:
+
+ esp01:
+    name: "Radio"
+    control: hidden
+    view: no
+    entities:
+      - switch.radio
+      - switch.antenne
+
+
+shell_command:
+  backup_config: 'sudo bash /home/homeassistant/script/uhf.sh'
+  update_ha: 'sudo bash /home/homeassistant/script/uhf.sh </dev/null >> /home/homeassistant/log/update_ha.log 2>&1 &'
+  restart_ha: 'sudo hassctl restart'
+  del_log: rm /home/homeassistant/.homeassistant/home-assistant.log && to
+

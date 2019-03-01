@@ -1,0 +1,30 @@
+
+##################################################################
+## Packages / Esp8266 #2 / Tnx to Cvoid for help                ##
+## @darkgeej - https://github.com/darkgeej/Home-AssistantConfig ##
+##################################################################
+homeassistant:
+
+##############
+## Sensors  ##
+##############
+
+
+camera:
+    platform: generic
+    still_image_url: http://10.0.0.124/ISAPI/Streaming/channels/1/picture
+    name: Hikvision Cam 1
+    username: admin
+    password: Normann2750!
+
+
+############
+## Groups ##
+############
+group:
+
+  ipcams:
+    name: "Ipcam"
+    view: no
+    entities:
+      - camera.hikvision_cam_1

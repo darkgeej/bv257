@@ -1,0 +1,139 @@
+##################################################################
+## Packages / Esp8266 #2 / Tnx to Cvoid for help                ##
+## @darkgeej - https://github.com/darkgeej/Home-AssistantConfig ##
+##################################################################
+homeassistant:
+  customize:
+
+    switch.radio:
+      icon: mdi:spotlight
+      friendly_name: Radio
+
+    script.hf:
+      icon: mdi:radio-tower
+      friendly_name: HF
+
+    script.28mhz:
+      icon: mdi:radio-tower
+      friendly_name: 28Mhz
+
+    script.50mhz:
+      icon: mdi:radio-tower
+      friendly_name: 50Mhz
+
+    script.70mhz:
+      icon: mdi:radio-tower
+      friendly_name: 70Mhz
+
+
+###############
+## Switches  ##
+###############
+switch:
+
+  - platform: mqtt
+    name: "Radio"
+    state_topic: "esp01/15/Switch"
+    command_topic: "esp01/gpio/15"
+    payload_on: "1"
+    payload_off: "0"
+    optimistic: false
+    qos: 0
+  70mhz:
+    sequence:
+      - service: switch.turn_on
+        entity_id: switch.rel_3
+      - service: switch.turn_off
+        entity_id: switch.switch2
+      - service: switch.turn_off
+        entity_id: switch.rel    retain: true
+
+  - platform: mqtt
+    name: "Relæ1"
+    state_topic: "esp01/4/Switch"
+    command_topic: "esp01/gpio/4"
+    payload_on: "1"
+    payload_off: "0"
+    optimistic: false
+    qos: 0
+    retain: true
+
+  - platform: mqtt
+    name: "Relæ 2"
+    state_topic: "esp01/5/Switch"
+    command_topic: "esp01/gpio/5"
+    payload_on: "1"
+    payload_off: "0"
+    optimistic: false
+    qos: 0
+    retain: true
+
+  - platform: mqtt
+    name: "Relæ 3"
+    state_topic: "esp01/14/Switch"
+    command_topic: "esp01/gpio/14"
+    payload_on: "1"
+    payload_off: "0"
+    optimistic: false
+    qos: 0
+    retain: true
+
+############
+## Groups ##
+############
+group:
+
+ esp01:
+    name: "Radio"
+    control: hidden
+    view: no
+    entities:
+      - switch.radio
+      - script.28mhz
+      - script.50mhz
+      - script.70mhz
+      - script.hf
+
+############
+## Script ##
+############
+
+script:
+
+  hf:
+    sequence:
+      - service: switch.turn_off
+        entity_id: switch.rel1   
+      - service: switch.turn_off
+        entity_id: switch.rel_2  
+      - service: switch.turn_off
+        entity_id: switch.rel_3            
+
+  28mhz:
+    sequence:
+      - service: switch.turn_on
+        entity_id: switch.rel_2
+      - service: switch.turn_off
+        entity_id: switch.rel1
+      - service: switch.turn_off
+        entity_id: switch.rel_3
+
+  50mhz:
+    sequence:
+      - service: switch.turn_on
+        entity_id: switch.rel1
+      - service: switch.turn_off
+        entity_id: switch.rel_2
+      - service: switch.turn_off
+        entity_id: switch.rel_3
+
+
+  70mhz:
+    sequence:
+      - service: switch.turn_on
+        entity_id: switch.rel_3
+      - service: switch.turn_off
+        entity_id: switch.switch2
+      - service: switch.turn_off
+        entity_id: switch.rel1
+

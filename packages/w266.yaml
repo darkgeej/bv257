@@ -1,0 +1,180 @@
+
+##################################################################
+## Packages / Esp8266 #2 / Tnx to Cvoid for help                ##
+## @darkgeej - https://github.com/darkgeej/Home-AssistantConfig ##
+##################################################################
+homeassistant:
+  customize:
+
+    sensor.vind_hastighed:
+      icon: mdi:weather-windy
+      friendly_name: Vind Hastighed
+
+    sensor.vind_hastighed_gennemsnit:
+      icon: mdi:weather-windy
+      friendly_name: Vind Hastighed Gennemsnit
+
+    sensor.wind_compass_abbreviation:
+      icon: mdi:weather-windy
+      friendly_name: Vind retning
+
+
+    sensor.regn_mængde:
+      icon: mdi:weather-rainy
+      friendly_name: Regnmændge
+
+    sensor.regn_mændge_total:
+      icon: mdi:weather-rainy
+      friendly_name: Regnmændge
+
+    sensor.fugt_ude:
+      icon: mdi:water-percent
+      friendly_name: Fugt ude
+
+    sensor.temperatur_ude:
+      icon: mdi:temperature-celsius
+      friendly_name: Temperatur ude
+
+ #   history_graph.altanluxg:
+ #     friendly_name: Sensore på altanen
+
+
+##############
+## Sensors  ##
+##############
+sensor:
+
+  - platform: mqtt
+    name: "Vind retning"
+    state_topic: "W266/Wind/Vind-retning"
+    qos: 0
+    unit_of_measurement: "Grader"
+
+  - platform: mqtt
+    name: "Vind hastighed"
+    state_topic: "W266/Wind/Vind-hastighed"
+    qos: 0
+    unit_of_measurement: "M/s"
+
+  - platform: mqtt
+    name: "Vind hastighed gennemsnit"
+    state_topic: "W266/Wind/Vind-gemmensnit"
+    qos: 0
+    unit_of_measurement: "M/s"
+
+  - platform: mqtt
+    name: "Temperatur ude"
+    state_topic: "W266/main_temp/temp"
+    qos: 0
+    unit_of_measurement: "Grader"
+
+  - platform: mqtt
+    name: "Fugt ude"
+    state_topic: "W266/main_temp/fugtighed"
+    qos: 0
+    unit_of_measurement: "%"
+
+  - platform: mqtt
+    name: "Regn mængde"
+    state_topic: "W266/regn/millibar-timen"
+    qos: 0
+    unit_of_measurement: "Miliebar"
+
+  - platform: mqtt
+    name: "Regn mændge total"
+    state_topic: "W266/regn/milibar-totalt"
+    qos: 0
+    unit_of_measurement: "Milibar"
+
+
+####################################################
+# WIND COMPASS                                     #
+####################################################
+
+
+  - platform: template
+    sensors: 
+      wind_compass_abbreviation:
+        value_template: >-
+          {% if 354.38 <= states('sensor.vind_retning')|float <= 5.62 %}
+             N
+          {% elif 5.63 <= states('sensor.vind_retning')|float <= 16.87 %}
+             NrØ
+          {% elif 16.88 <= states('sensor.vind_retning')|float <= 28.12 %}
+             NNØ
+          {% elif 28.13 <= states('sensor.vind_retning')|float <= 39.37 %}
+             NØrN
+          {% elif 39.38 <= states('sensor.vind_retning')|float <= 50.62 %}
+             N*
+          {% elif 50.63 <= states('sensor.vind_retning')|float <= 61.87 %}
+             NØrØ
+          {% elif 61.88 <= states('sensor.vind_retning')|float <= 73.12 %}
+             ØNØ
+          {% elif 73.13 <= states('sensor.vind_retning')|float <= 84.37 %}
+             ØrN
+          {% elif 84.38 <= states('sensor.vind_retning')|float <= 95.62 %}
+             Ø
+          {% elif 95.63 <= states('sensor.vind_retning')|float <= 106.87 %}
+             ØrS
+          {% elif 106.88 <= states('sensor.vind_retning')|float <= 118.12 %}
+             ØSØ
+          {% elif 118.13 <= states('sensor.vind_retning')|float <= 129.37 %}
+             SØbØ
+          {% elif 129.38 <= states('sensor.vind_retning')|float <= 140.62 %}
+             SØ
+          {% elif 140.63 <= states('sensor.vind_retning')|float <= 151.87 %}
+             SØrS
+          {% elif 151.88 <= states('sensor.vind_retning')|float <= 163.12 %}
+             SSØ
+          {% elif 163.13 <= states('sensor.vind_retning')|float <= 174.37 %}
+             SrØ
+          {% elif 174.38 <= states('sensor.vind_retning')|float <= 185.62 %}
+             S
+          {% elif 185.63 <= states('sensor.vind_retning')|float <= 196.87 %}
+             SbV
+          {% elif 196.88 <= states('sensor.vind_retning')|float <= 208.12 %}
+             SSV
+          {% elif 208.13 <= states('sensor.vind_retning')|float <= 219.37 %}
+             SVrS
+          {% elif 219.38 <= states('sensor.vind_retning')|float <= 230.62 %}
+             SV
+          {% elif 230.63 <= states('sensor.vind_retning')|float <= 241.87 %}
+             SVrV
+          {% elif 241.88 <= states('sensor.vind_retning')|float <= 253.12 %}
+             VSV
+          {% elif 253.13 <= states('sensor.vind_retning')|float <= 264.37 %}
+             VrS
+          {% elif 264.38 <= states('sensor.vind_retning')|float <= 275.62 %}
+             v
+          {% elif 275.63 <= states('sensor.vind_retning')|float <= 286.87 %}
+             VrN
+          {% elif 286.88 <= states('sensor.vind_retning')|float <= 298.12 %}
+             VNV
+          {% elif 298.13 <= states('sensor.vind_retning')|float <= 309.37 %}
+             NVrV
+          {% elif 309.38 <= states('sensor.vind_retning')|float <= 320.62 %}
+             NV
+          {% elif 320.63 <= states('sensor.vind_retning')|float <= 331.87 %}
+             NVrN
+          {% elif 331.88 <= states('sensor.vind_retning')|float <= 343.12 %}
+             NNV
+          {% elif 343.13 <= states('sensor.vind_retning')|float <= 354.37 %}
+             NrV
+          {% endif %}
+
+############
+## Groups ##
+############
+group:
+
+  W266:
+    name: "Haven"
+    view: no
+    entities:
+      - sensor.vind_hastighed
+      - sensor.vind_hastighed_gennemsnit
+      - sensor.wind_compass_abbreviation
+      - sensor.regn_mængde
+      - sensor.regn_mændge_total
+      - sensor.fugt_ude
+      - sensor.temperatur_ude

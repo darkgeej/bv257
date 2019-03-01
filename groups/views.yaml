@@ -1,0 +1,35 @@
+default_view:
+  name: Dagen i dag
+  view: yes
+  entities:
+    - group.wetter_all
+
+Stuen:
+  name: Stue
+  view: yes
+  icon: mdi:sofa
+  entities:
+    - group.bv257stue
+
+RadioRummte:
+  name: radio
+  view: yes
+  icon: mdi:radio-handheld
+  entities:
+    - group.esp01
+
+Vejrstation:
+  name: w266
+  view: yes
+  icon: mdi:weather-cloudy
+  entities:
+    - group.w266
+
+Ipcams:
+  name: ipcams
+  view: yes
+  icon: mdi:camera-front
+  entities:
+    - group.ipcams
+    - group.ipcams_2
+#    - binary_sensor.ip_camera_motion
