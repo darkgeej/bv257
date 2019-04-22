@@ -20,6 +20,6 @@
 <hr />
 <ul>
 <li><a href="http://darkgeej.dk" target="_blank" rel="noopener">http://darkgeej.dk</a></li>
-<li><a href="http://dehulesider.dk/lychee">http://dehulesider.dk/lychee</a></li>
+<li><a href="http://dehulesider.dk/photos">http://dehulesider.dk/photos</a></li>
 <li><a href="https://github.com/darkgeej" target="_blank" rel="noopener">https://github.com/darkgeej</a></li>
 </ul>
